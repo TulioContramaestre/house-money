@@ -1,0 +1,50 @@
+:root {
+  --rail: #2A1810;
+  --rail-2: #3A2318;
+  --rail-line: rgba(212, 180, 108, .30);
+  --felt: #0E4A34;
+  --felt-hi: #17613F;
+  --felt-lo: #083223;
+  --felt-line: rgba(245, 240, 228, .40);
+  --brass: #D4B46C;
+  --brass-ink: #2A1C08;
+  --ivory: #F5F0E4;
+  --paper: #FBF7EE;
+  --ink: #211C16;
+  --ink-2: #6A5F52;
+  --win: #1E7444;
+  --loss: #A3302A;
+  --win-felt: #A6E6BB;
+  --loss-felt: #F5ABA4;
+  --red: #B32F29;
+  --blk: #1B1B1B;
+  --zero: #167A4A;
+
+  --ui: var(--font-archivo), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tape: var(--font-courier-prime), "Courier New", ui-monospace, monospace;
+
+  --chip-1-face: #F1EEE6;
+  --chip-1-edge: #2F5DA8;
+  --chip-1-text: #1E2A44;
+  --chip-5-face: #B8312B;
+  --chip-5-edge: #F5F0E4;
+  --chip-25-face: #2A7A4B;
+  --chip-25-edge: #F5F0E4;
+  --chip-100-face: #1C1C1C;
+  --chip-100-edge: #E9E2D2;
+  --chip-500-face: #5C3B8E;
+  --chip-500-edge: #EFE6FF;
+  --chip-1m-face: #D9A21B;
+  --chip-1m-edge: #3A2A06;
+  --chip-1m-text: #2A1C08;
+
+  --radius-board: 6px;
+  --radius-card: 7px;
+  --radius-box: 8px;
+  --radius-button: 10px;
+  --radius-banner: 12px;
+  --radius-spot: 14px;
+  --radius-dialog: 16px;
+  --radius-felt: 20px;
+  --radius-pill: 999px;
+}
