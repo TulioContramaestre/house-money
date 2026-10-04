@@ -1,0 +1,1 @@
+export { ReceiptByGame } from "./ReceiptByGame";

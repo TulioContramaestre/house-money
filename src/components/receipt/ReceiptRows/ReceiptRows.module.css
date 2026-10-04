@@ -1,0 +1,40 @@
+.rows {
+  margin: 0;
+}
+
+.rows > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 3px 0;
+  font-size: 15px;
+}
+
+.rows dt {
+  color: var(--ink-2);
+}
+
+.rows dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 700;
+}
+
+.rows > .net {
+  border-top: 1px dashed #BDB2A0;
+  margin-top: 8px;
+  padding-top: 10px;
+}
+
+.net dd {
+  font-size: 30px;
+  line-height: 1.1;
+}
+
+.pos dd {
+  color: var(--win);
+}
+
+.neg dd {
+  color: var(--loss);
+}

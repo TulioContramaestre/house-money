@@ -1,0 +1,18 @@
+.quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.amount {
+  border: 1px solid var(--felt-line);
+  background: transparent;
+  border-radius: var(--radius-pill);
+  padding: 6px 14px;
+  font-size: 14px;
+}
+
+.amount:hover {
+  background: rgba(245, 240, 228, .08);
+}

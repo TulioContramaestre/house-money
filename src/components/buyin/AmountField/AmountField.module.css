@@ -1,0 +1,40 @@
+.label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.amount {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--brass);
+  padding-bottom: 4px;
+}
+
+.amount .input {
+  flex: 1;
+  min-width: 0;
+  background: transparent;
+  border: 0;
+  font-size: clamp(34px, 8vw, 48px);
+  font-weight: 700;
+  font-stretch: 110%;
+  padding: 4px 0;
+  outline: none;
+  color: var(--ivory);
+}
+
+.input::placeholder {
+  color: rgba(245, 240, 228, .3);
+}
+
+.hint {
+  min-height: 1.45em;
+  margin: 10px 0 18px;
+  font-size: 14px;
+  color: rgba(245, 240, 228, .72);
+}
+
+.err {
+  color: var(--loss-felt);
+}

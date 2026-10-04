@@ -1,0 +1,35 @@
+.buyin {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  place-items: center;
+  padding: 24px 16px;
+  background: radial-gradient(120% 80% at 50% 0%, var(--felt-hi), var(--felt) 50%, var(--felt-lo));
+}
+
+.card {
+  width: 100%;
+  max-width: 440px;
+}
+
+.brand {
+  font-stretch: 125%;
+  font-weight: 800;
+  font-size: clamp(40px, 9vw, 64px);
+  line-height: .95;
+  letter-spacing: -.01em;
+  margin: 0 0 14px;
+  color: var(--ivory);
+}
+
+.lede {
+  margin: 0 0 32px;
+  color: rgba(245, 240, 228, .8);
+  max-width: 34ch;
+}
+
+@media print {
+  .buyin {
+    display: none !important;
+  }
+}
