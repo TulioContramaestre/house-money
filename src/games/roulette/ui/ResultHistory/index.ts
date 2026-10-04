@@ -1,0 +1,1 @@
+export { ResultHistory } from "./ResultHistory";

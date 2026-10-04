@@ -1,0 +1,12 @@
+.side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 8px;
+  border-radius: var(--radius-spot);
+  border: 1.5px solid transparent;
+}
+
+.won {
+  border-color: var(--brass);
+}

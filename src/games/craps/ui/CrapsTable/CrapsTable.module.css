@@ -1,0 +1,21 @@
+.cr {
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.fieldNums {
+  font-stretch: 110%;
+  font-size: 14px;
+  letter-spacing: .06em;
+  color: var(--ivory);
+}
+
+.fieldNums b {
+  color: var(--brass);
+}

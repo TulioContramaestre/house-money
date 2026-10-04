@@ -1,0 +1,20 @@
+.rack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 20px;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+}
+
+@media (max-width: 620px) {
+  .rack {
+    position: sticky;
+    bottom: 0;
+    z-index: 2;
+    background: var(--rail);
+    margin: 0 -12px;
+    padding: 12px 12px 14px;
+    border-top: 1px solid var(--rail-line);
+  }
+}

@@ -1,0 +1,41 @@
+.road {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 18px;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
+}
+
+.dot {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+  font-weight: 800;
+  border: 2px solid;
+}
+
+.P {
+  border-color: #8EB6F0;
+  color: #8EB6F0;
+}
+
+.B {
+  border-color: #F08E86;
+  color: #F08E86;
+}
+
+.T {
+  border-color: var(--win-felt);
+  color: var(--win-felt);
+}
+
+.label {
+  font-size: 12px;
+  color: rgba(245, 240, 228, .6);
+  margin-right: 6px;
+}

@@ -1,0 +1,1 @@
+export { BaccaratTable } from "./BaccaratTable";

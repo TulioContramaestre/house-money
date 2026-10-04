@@ -1,0 +1,29 @@
+.betspot {
+  margin-top: 18px;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 1.5px solid var(--felt-line);
+  background: rgba(0, 0, 0, .1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--ivory);
+}
+
+.betspot:hover {
+  background: rgba(245, 240, 228, .07);
+}
+
+.name {
+  font-stretch: 120%;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.betspot small {
+  font-size: 12px;
+  color: rgba(245, 240, 228, .7);
+}
