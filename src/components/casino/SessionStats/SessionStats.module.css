@@ -1,0 +1,42 @@
+.stats {
+  display: flex;
+  gap: 28px;
+  margin: 0;
+}
+
+.stats > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.stats dt {
+  font-size: 12px;
+  color: rgba(245, 240, 228, .62);
+}
+
+.stats dd {
+  margin: 0;
+  font-weight: 700;
+  font-size: 20px;
+  font-stretch: 110%;
+}
+
+.stats dd.pos {
+  color: var(--win-felt);
+}
+
+.stats dd.neg {
+  color: var(--loss-felt);
+}
+
+@media (max-width: 900px) {
+  .stats {
+    gap: 20px;
+    order: 3;
+    width: 100%;
+  }
+
+  .stats dd {
+    font-size: 18px;
+  }
+}

@@ -1,0 +1,29 @@
+.tabs {
+  display: flex;
+  gap: 4px;
+  overflow-x: auto;
+  padding-top: 6px;
+}
+
+.tab {
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  padding: 12px 14px 10px;
+  font-stretch: 115%;
+  font-weight: 600;
+  color: rgba(245, 240, 228, .65);
+}
+
+.tab[aria-selected="true"] {
+  color: var(--brass);
+  border-bottom-color: var(--brass);
+}
+
+.tab:hover {
+  color: var(--ivory);
+}
+
+.locked {
+  opacity: .4;
+}

@@ -1,0 +1,36 @@
+.chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 6px;
+}
+
+.chip {
+  display: inline-grid;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  transition: transform .12s ease;
+}
+
+.chip[aria-pressed="true"] {
+  transform: translateY(-6px);
+}
+
+.chip[aria-pressed="true"] > * {
+  box-shadow: 0 0 0 2px var(--c), 0 0 0 5px var(--brass), 0 9px 0 2px rgba(0, 0, 0, .3);
+}
+
+.chip:disabled {
+  opacity: .3;
+  cursor: not-allowed;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}

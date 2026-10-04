@@ -1,0 +1,78 @@
+.entry {
+  padding: 12px 0;
+  border-bottom: 1px dashed #CFC5B4;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.fresh {
+  animation: inkin 1.1s ease-out;
+}
+
+@keyframes inkin {
+  from {
+    background: #F1E3BE;
+  }
+  to {
+    background: transparent;
+  }
+}
+
+.head {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+}
+
+.head b {
+  color: var(--ink);
+  font-size: 14px;
+}
+
+.main {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 3px;
+}
+
+.net {
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.win .net {
+  color: var(--win);
+}
+
+.loss .net {
+  color: var(--loss);
+}
+
+.even .net {
+  color: var(--ink-2);
+}
+
+.buyin .net {
+  color: var(--ink);
+}
+
+.detail {
+  margin: 4px 0 0;
+  color: var(--ink-2);
+  font-size: 12.5px;
+}
+
+.balance {
+  text-align: right;
+  font-size: 12.5px;
+  margin-top: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fresh {
+    animation: none;
+  }
+}
