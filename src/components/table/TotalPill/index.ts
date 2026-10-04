@@ -1,0 +1,1 @@
+export { TotalPill } from "./TotalPill";

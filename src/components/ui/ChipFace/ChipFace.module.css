@@ -1,0 +1,77 @@
+.face {
+  --c: #eee;
+  --edge: #fff;
+  --txt: #fff;
+  border-radius: 50%;
+  background: var(--c);
+  border: 4px dashed var(--edge);
+  box-shadow: 0 0 0 2px var(--c), 0 3px 0 2px rgba(0, 0, 0, .35);
+  display: inline-grid;
+  place-items: center;
+  font-weight: 800;
+  color: var(--txt);
+  font-stretch: 100%;
+  line-height: 1;
+}
+
+.rack {
+  width: 50px;
+  height: 50px;
+  font-size: 12.5px;
+}
+
+.stake {
+  width: 36px;
+  height: 36px;
+  font-size: 10px;
+  border-width: 3px;
+  flex: none;
+}
+
+.stakeLarge {
+  width: 54px;
+  height: 54px;
+  font-size: 13px;
+  border-width: 4px;
+  flex: none;
+}
+
+.stakeSmall {
+  width: 30px;
+  height: 30px;
+  font-size: 9.5px;
+  border-width: 3px;
+  flex: none;
+}
+
+.c1 {
+  --c: var(--chip-1-face);
+  --edge: var(--chip-1-edge);
+  --txt: var(--chip-1-text);
+}
+
+.c5 {
+  --c: var(--chip-5-face);
+  --edge: var(--chip-5-edge);
+}
+
+.c25 {
+  --c: var(--chip-25-face);
+  --edge: var(--chip-25-edge);
+}
+
+.c100 {
+  --c: var(--chip-100-face);
+  --edge: var(--chip-100-edge);
+}
+
+.c500 {
+  --c: var(--chip-500-face);
+  --edge: var(--chip-500-edge);
+}
+
+.c1m {
+  --c: var(--chip-1m-face);
+  --edge: var(--chip-1m-edge);
+  --txt: var(--chip-1m-text);
+}

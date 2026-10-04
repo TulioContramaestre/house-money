@@ -1,0 +1,19 @@
+.outcome {
+  font-size: 13px;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  padding: 2px 10px;
+  background: rgba(0, 0, 0, .3);
+}
+
+.win {
+  color: var(--win-felt);
+}
+
+.loss {
+  color: var(--loss-felt);
+}
+
+.push {
+  color: var(--ivory);
+}

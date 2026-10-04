@@ -1,0 +1,31 @@
+.dialog {
+  border: 0;
+  border-radius: var(--radius-dialog);
+  background: var(--paper);
+  color: var(--ink);
+  padding: 26px;
+  max-width: 380px;
+  width: calc(100% - 32px);
+}
+
+.dialog::backdrop {
+  background: rgba(12, 7, 4, .66);
+}
+
+.title {
+  margin: 0 0 8px;
+  font-stretch: 115%;
+  font-size: 22px;
+}
+
+.body {
+  margin: 0 0 22px;
+  color: var(--ink-2);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}

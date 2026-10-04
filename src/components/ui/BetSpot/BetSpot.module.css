@@ -1,0 +1,46 @@
+.spot {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-height: 86px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--felt-line);
+  border-radius: var(--radius-spot);
+  background: rgba(0, 0, 0, .08);
+  color: var(--ivory);
+  text-align: center;
+}
+
+.spot:hover {
+  background: rgba(245, 240, 228, .07);
+}
+
+.closed {
+  opacity: .42;
+}
+
+.name {
+  font-stretch: 120%;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.pay {
+  font-size: 13px;
+  color: var(--brass);
+}
+
+.foot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+}
+
+.won {
+  border-color: var(--win-felt);
+  box-shadow: 0 0 0 1px var(--win-felt) inset;
+}

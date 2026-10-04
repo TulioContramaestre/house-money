@@ -1,0 +1,19 @@
+.row {
+  display: flex;
+  min-height: 96px;
+  align-items: flex-start;
+}
+
+.cards > * + * {
+  margin-left: -24px;
+}
+
+.slots > * + * {
+  margin-left: 10px;
+}
+
+@media (max-width: 620px) {
+  .row {
+    min-height: 86px;
+  }
+}

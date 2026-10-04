@@ -1,0 +1,10 @@
+.print {
+  font-stretch: 125%;
+  font-weight: 600;
+  color: var(--brass);
+  text-align: center;
+  font-size: 13px;
+  line-height: 1.5;
+  opacity: .85;
+  margin: 22px 0;
+}

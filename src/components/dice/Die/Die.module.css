@@ -1,0 +1,33 @@
+.die {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  background: #C0302A;
+  display: grid;
+  grid-template: repeat(3, 1fr) / repeat(3, 1fr);
+  padding: 7px;
+  gap: 2px;
+  box-shadow: inset 0 -3px 0 rgba(0, 0, 0, .25), 0 4px 10px rgba(0, 0, 0, .3);
+}
+
+.die > i {
+  border-radius: 50%;
+}
+
+.die > .on {
+  background: #F7F2E6;
+}
+
+.empty {
+  background: transparent;
+  box-shadow: none;
+  border: 1.5px dashed var(--felt-line);
+}
+
+.tumble {
+  transform: rotate(-8deg);
+}
+
+.tumble + .tumble {
+  transform: rotate(11deg);
+}

@@ -1,0 +1,14 @@
+.slot {
+  width: 66px;
+  height: 94px;
+  border-radius: var(--radius-card);
+  border: 1px dashed var(--felt-line);
+  flex: none;
+}
+
+@media (max-width: 620px) {
+  .slot {
+    width: 58px;
+    height: 84px;
+  }
+}

@@ -1,0 +1,9 @@
+.total {
+  font-stretch: 100%;
+  font-weight: 700;
+  color: var(--ivory);
+  background: rgba(0, 0, 0, .28);
+  border-radius: var(--radius-pill);
+  padding: 1px 10px;
+  font-size: 14px;
+}

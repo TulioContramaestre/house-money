@@ -1,0 +1,1 @@
+export { SeatLabel } from "./SeatLabel";

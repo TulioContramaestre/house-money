@@ -1,0 +1,45 @@
+.btn {
+  min-height: 44px;
+  padding: 0 18px;
+  border-radius: var(--radius-button);
+  border: 1px solid var(--felt-line);
+  background: transparent;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.btn:hover {
+  background: rgba(245, 240, 228, .08);
+}
+
+.primary {
+  background: var(--brass);
+  border-color: var(--brass);
+  color: var(--brass-ink);
+  font-weight: 700;
+}
+
+.primary:hover {
+  background: #E2C47E;
+}
+
+.btn[aria-disabled="true"] {
+  opacity: .38;
+  cursor: not-allowed;
+}
+
+.btn[aria-disabled="true"]:hover {
+  background: transparent;
+}
+
+.primary[aria-disabled="true"]:hover {
+  background: var(--brass);
+}
+
+:global(dialog) .btn {
+  border-color: #CBBFA9;
+}
+
+:global(dialog) .btn:hover {
+  background: #F0E9DA;
+}
