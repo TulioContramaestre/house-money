@@ -4,11 +4,13 @@ export abstract class EngineBase<TView extends BaseView, TAction extends GameAct
   abstract readonly id: string;
   abstract readonly name: string;
   protected msg: string;
+  protected readonly opening: string;
   readonly #listeners = new Set<() => void>();
   #view: Readonly<TView> | null = null;
 
   constructor(ledger: Pick<LedgerPort, "subscribe">, message: string) {
     this.msg = message;
+    this.opening = message;
     ledger.subscribe(() => this.changed());
   }
 

@@ -96,7 +96,9 @@ export class BlackjackEngine extends EngineBase<BlackjackView, BlackjackAction> 
   }
 
   leave(): void {
-    if (this.#bet && this.#deps.ledger.release(this.#bet)) this.#bet = 0;
+    if (!this.#bet || !this.#deps.ledger.release(this.#bet)) return;
+    this.#bet = 0;
+    this.say(this.opening);
   }
 
   protected buildView(): BlackjackView {

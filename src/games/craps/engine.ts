@@ -76,6 +76,7 @@ export class CrapsEngine extends EngineBase<CrapsView, CrapsAction> {
     if (staked && this.#deps.ledger.release(staked)) {
       this.#bets = noBets();
       this.#pending = [];
+      this.say(this.#point === null ? this.opening : "No bets down.");
     }
   }
 

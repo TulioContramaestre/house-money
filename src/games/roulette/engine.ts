@@ -88,6 +88,7 @@ export class RouletteEngine extends EngineBase<RouletteView, RouletteAction> {
     if (staked && this.#deps.ledger.release(staked)) {
       this.#bets = new Map();
       this.#pending = [];
+      this.say(this.opening);
     }
   }
 

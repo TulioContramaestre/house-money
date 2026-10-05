@@ -87,6 +87,7 @@ export class BaccaratEngine extends EngineBase<BaccaratView, BaccaratAction> {
     if (staked && this.#deps.ledger.release(staked)) {
       this.#bets = noBets();
       this.#pending = [];
+      this.say(this.opening);
     }
   }
 
