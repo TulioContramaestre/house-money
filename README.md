@@ -89,6 +89,7 @@ These differences are intentional:
 
   In the app every screen fits from 320px up. The tabs share the row, the header numbers wrap, and below 360px the tab text and the baccarat hands tighten slightly.
 - **Touch screens.** Buttons don't trigger double-tap zoom, and hover tints only appear with a mouse or trackpad. The buy-in and receipt pages size to the visible screen on phones.
+- **Leaving a game.** When unplayed chips go back to cash, the game's message goes back to its opening prompt. In craps, while a point is on, it says "No bets down." instead.
 - **Buy-in double submit.** Submitting the buy-in a second time while the session is opening does nothing.
 - **Reduced motion.** The setting is read live, so changing it mid-session takes effect on the next deal, spin or roll.
 - **Fonts.** They're self-hosted with `next/font`. Courier Prime renders with very slightly different anti-aliasing from the copy the reference loads from Google Fonts. The layout is identical.

@@ -27,6 +27,7 @@ app/  →  components/ + games/*/ui + games/GameStage  →  session/  →  games
 - React reads frozen snapshots through `useSyncExternalStore` (`session/hooks.ts`). Every hook's server snapshot is the idle state, because every page is prerendered.
 - **Engines** extend `games/engineBase.ts`.
   - The base class caches a frozen view until something changes. Engines call `say()` or `changed()` to publish.
+  - The ledger notifies synchronously and React reads the view inside that notification, so every state change must end with `say()` or `changed()`. A ledger call alone leaves a stale view cached.
   - Async sequences (dealing, the dealer's turn, spinning, tumbling) live in the engine and wait on `deps.pause`.
   - Money goes through `deps.ledger` (`reserve`, `release`, `settle`); the chip comes from `deps.getChip()` and randomness from `deps.rng`.
 - **Guards** in `session/guards.ts` decide where each route sends you.
@@ -53,7 +54,7 @@ Global prototypes are deliberately not frozen, because freezing them breaks Reac
 3. **Create `engine.ts`** with `class <Name>Engine extends EngineBase<View, Action>`.
    - Give it `readonly id = "<id>"` (a literal) and `readonly name`.
    - The constructor calls `super(deps.ledger, "<opening message>")`.
-   - Implement `dispatch` (an exhaustive `switch` ending in `exhaustive(action)`, ignoring actions while busy), `isBusy`, `canLeave`, `lockMessage`, `leave` (release unplayed chips) and `buildView` (which must include `message`, `busy` and `canLeave`).
+   - Implement `dispatch` (an exhaustive `switch` ending in `exhaustive(action)`, ignoring actions while busy), `isBusy`, `canLeave`, `lockMessage`, `leave` (release unplayed chips, then `say()` so the view republishes) and `buildView` (which must include `message`, `busy` and `canLeave`).
    - Add `engine.test.ts` using `engineHarness` with `scriptedRng` or `stackedShoe` from `src/test/`.
 4. **Create `ui/` with a `Table` and an `Actions` component.** Both take `GameUiProps<View, Action>` (`{ view, dispatch }`). Build them from `components/ui`, `components/table`, `components/cards` and `components/dice`. Add a `ui/ui.test.tsx` using `renderLive` from `src/test/liveGame.tsx`.
 5. **Register it in two places:**
