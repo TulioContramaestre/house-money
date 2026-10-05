@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import type { Card } from "@/lib/cards/card";
-import { engineHarness, flush, type HarnessOptions } from "@/test/engineHarness";
+import { engineHarness, flush, readOnEveryChange, type HarnessOptions } from "@/test/engineHarness";
 import { stackedShoe } from "@/test/stackedShoe";
 import { BlackjackEngine } from "./engine";
 
@@ -260,13 +260,19 @@ describe("locks and leaving", () => {
     expect(t.engine.lockMessage()).toBe("Finish this hand first.");
   });
 
-  test("leave returns an unplayed bet", async () => {
+  test("leave returns an unplayed bet and clears the bet circle", async () => {
     const t = await table("");
+    readOnEveryChange(t.engine);
     t.engine.dispatch({ type: "bet" });
     t.engine.dispatch({ type: "bet" });
     t.engine.leave();
     expect(t.ledger.reserved).toBe(0);
-    expect(t.view().bet).toBe(0);
+    expect(t.view()).toMatchObject({
+      bet: 0,
+      canClear: false,
+      canDeal: false,
+      message: "Pick a chip, then tap the bet circle.",
+    });
   });
 });
 

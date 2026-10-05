@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { seededRng, type Rng } from "@/lib/random/rng";
-import { engineHarness, flush, type HarnessOptions } from "@/test/engineHarness";
+import { engineHarness, flush, readOnEveryChange, type HarnessOptions } from "@/test/engineHarness";
 import { CrapsEngine } from "./engine";
 import type { CrapsSpot, DieFace } from "./types";
 
@@ -245,5 +245,36 @@ describe("dice", () => {
     const view = t.view();
     expect(view.history).toHaveLength(18);
     expect(view.history[0]).toBe(view.sum);
+  });
+});
+
+describe("leaving", () => {
+  test("on the come-out, returns every bet and goes back to the opening prompt", async () => {
+    const t = await table();
+    readOnEveryChange(t.engine);
+    t.bet("pass");
+    t.bet("field", 1000);
+    t.engine.leave();
+    expect(t.ledger.reserved).toBe(0);
+    expect(t.view().spots.map((s) => s.stake)).toEqual([0, 0, 0, 0, 0, 0]);
+    expect(t.view()).toMatchObject({
+      canUndo: false,
+      canClear: false,
+      canRoll: false,
+      message: "Come-out roll. Bet the pass line or don't pass, then roll.",
+    });
+  });
+
+  test("with the point on and only one-roll bets, says no bets are down", async () => {
+    const t = await table();
+    readOnEveryChange(t.engine);
+    t.bet("field");
+    await t.roll(2, 4);
+    t.bet("field", 1000);
+    expect(t.engine.canLeave()).toBe(true);
+    t.engine.leave();
+    expect(t.ledger.reserved).toBe(0);
+    expect(t.spot("field")?.stake).toBe(0);
+    expect(t.view()).toMatchObject({ point: 6, canClear: false, message: "No bets down." });
   });
 });

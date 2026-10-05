@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { seededRng } from "@/lib/random/rng";
-import { engineHarness, flush, type HarnessOptions } from "@/test/engineHarness";
+import { engineHarness, flush, readOnEveryChange, type HarnessOptions } from "@/test/engineHarness";
 import { stackedShoe } from "@/test/stackedShoe";
 import { BaccaratEngine } from "./engine";
 import type { BaccaratSpot } from "./types";
@@ -207,12 +207,19 @@ describe("locks and leaving", () => {
     expect(t.engine.canLeave()).toBe(true);
   });
 
-  test("leave returns unplayed chips", async () => {
+  test("leave returns unplayed chips and clears them from the table", async () => {
     const t = await table("");
+    readOnEveryChange(t.engine);
     t.bet("player");
     t.bet("tie", 1000);
     t.engine.leave();
     expect(t.ledger.reserved).toBe(0);
-    expect(t.view().canUndo).toBe(false);
+    expect(t.view().spots.map((s) => s.stake)).toEqual([0, 0, 0]);
+    expect(t.view()).toMatchObject({
+      canUndo: false,
+      canClear: false,
+      canDeal: false,
+      message: "Bet on player, banker or tie, then deal.",
+    });
   });
 });

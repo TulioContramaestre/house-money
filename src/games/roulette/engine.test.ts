@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 import { seededRng } from "@/lib/random/rng";
-import { engineHarness, flush, type HarnessOptions } from "@/test/engineHarness";
+import { engineHarness, flush, readOnEveryChange, type HarnessOptions } from "@/test/engineHarness";
 import { scriptedRng } from "@/test/scriptedRng";
 import { RouletteEngine } from "./engine";
 import type { RouletteAction, RouletteBetKey } from "./types";
@@ -194,5 +194,21 @@ describe("locks and leaving", () => {
     t.bet("red");
     t.engine.leave();
     expect(t.ledger.reserved).toBe(0);
+  });
+
+  test("leaving clears the returned chips from the layout", async () => {
+    const t = await table([]);
+    readOnEveryChange(t.engine);
+    t.bet("n17");
+    t.bet("red");
+    t.engine.leave();
+    expect(t.ledger.reserved).toBe(0);
+    expect(t.view()).toMatchObject({
+      cells: {},
+      canUndo: false,
+      canClear: false,
+      canSpin: false,
+      message: "Place chips on the layout, then spin.",
+    });
   });
 });

@@ -36,7 +36,7 @@ test("the back button moves between games that can be left", async ({ page }) =>
   await expect(page.getByRole("button", { name: "Bet on zero" })).toBeVisible();
 });
 
-test("leaving a game hands its unplayed chips back", async ({ page }) => {
+test("leaving a game hands its unplayed chips back and clears them from the table", async ({ page }) => {
   await buyIn(page);
   await openGame(page, "Roulette");
   await page.getByRole("button", { name: "Bet on red, pays 1 to 1" }).click();
@@ -45,6 +45,11 @@ test("leaving a game hands its unplayed chips back", async ({ page }) => {
   await openGame(page, "Craps");
   await expect.poll(() => readStats(page)).toEqual({ cash: 400_000, onTable: 0, net: 0 });
   expect(await logCount(page)).toBe(1);
+
+  await openGame(page, "Roulette");
+  await expect(page.getByLabel(/on this bet$/)).toHaveCount(0);
+  for (const name of ["Undo", "Clear", "Spin"]) await expect(button(page, name)).toHaveAttribute("aria-disabled", "true");
+  await expect(message(page)).toHaveText("Place chips on the layout, then spin.");
 });
 
 test("running out of chips shows the broke banner with a way out", async ({ page }) => {

@@ -53,3 +53,8 @@ export async function engineHarness<E>(create: (deps: EngineDeps) => E, options:
 export function flush(): Promise<void> {
   return new Promise((resolve) => setTimeout(resolve, 0));
 }
+
+/** Reads the view inside every change notification, the way useSyncExternalStore does. */
+export function readOnEveryChange(engine: { subscribe(listener: () => void): () => void; getView(): unknown }) {
+  return engine.subscribe(() => engine.getView());
+}
