@@ -46,10 +46,12 @@ Playwright clears `test-results/` at the start of every run, so run `test:visual
    - Environment variable: `NODE_VERSION` = `22`. Any version from 20.9 up works, but older build images default to an older Node.
 3. Deploy.
 
-You don't need any redirects or headers:
+You don't need any redirects:
 - Every route is a prerendered HTML file: `/`, `/play`, `/play/<game>`, `/receipt`.
 - Pages serves `play/blackjack.html` at `/play/blackjack`.
 - Unknown paths get `404.html`.
+
+`public/_headers` is copied into `out/`, and Pages applies it. It stops other sites from framing the casino, sets `nosniff` and a no-referrer policy, and caches the hashed files under `/_next/static/` for a year.
 
 Opening a game or receipt URL directly starts a fresh page with no session, so you land back at the cashier. That's expected.
 
@@ -79,7 +81,14 @@ Everything runs in the browser, so the protections make cheating hard but can't 
 These differences are intentional:
 
 - **Separate URLs.** Each screen has its own URL: `/`, `/play/<game>` and `/receipt`. Back and forward move between games, but they can't leave a game that's locked mid-round; you stay put and see the lock message. Unknown URLs show a short "There's no table here." page.
-- **No sideways scroll on phones.** At 390px the reference's buy-in card was wider than the screen, so the page scrolled sideways. The app's buy-in fits the screen.
+- **No sideways scroll on phones.** The reference scrolls sideways in several places on phones:
+  - At 390px the buy-in card was wider than the screen.
+  - The game tabs ran off the edge, cutting off Craps.
+  - Ten-digit balances widened the header.
+  - At 320px the baccarat hands pushed the table out.
+
+  In the app every screen fits from 320px up. The tabs share the row, the header numbers wrap, and below 360px the tab text and the baccarat hands tighten slightly.
+- **Touch screens.** Buttons don't trigger double-tap zoom, and hover tints only appear with a mouse or trackpad. The buy-in and receipt pages size to the visible screen on phones.
 - **Buy-in double submit.** Submitting the buy-in a second time while the session is opening does nothing.
 - **Reduced motion.** The setting is read live, so changing it mid-session takes effect on the next deal, spin or roll.
 - **Fonts.** They're self-hosted with `next/font`. Courier Prime renders with very slightly different anti-aliasing from the copy the reference loads from Google Fonts. The layout is identical.
