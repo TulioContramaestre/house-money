@@ -31,7 +31,8 @@
 
 @media (max-width: 900px) {
   .stats {
-    gap: 20px;
+    gap: 10px 20px;
+    flex-wrap: wrap;
     order: 3;
     width: 100%;
   }

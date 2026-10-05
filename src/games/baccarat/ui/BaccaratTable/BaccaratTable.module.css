@@ -26,3 +26,9 @@
     order: 3;
   }
 }
+
+@media (max-width: 359px) {
+  .hands {
+    gap: 8px;
+  }
+}

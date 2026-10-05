@@ -10,3 +10,9 @@
 .won {
   border-color: var(--brass);
 }
+
+@media (max-width: 359px) {
+  .side {
+    padding: 14px 0;
+  }
+}

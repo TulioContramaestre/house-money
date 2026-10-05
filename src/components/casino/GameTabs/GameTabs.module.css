@@ -20,10 +20,29 @@
   border-bottom-color: var(--brass);
 }
 
-.tab:hover {
-  color: var(--ivory);
+@media (hover: hover) {
+  .tab:hover {
+    color: var(--ivory);
+  }
 }
 
 .locked {
   opacity: .4;
+}
+
+@media (max-width: 620px) {
+  .tabs {
+    gap: 0;
+  }
+
+  .tab {
+    flex: 1 1 auto;
+    padding: 12px 4px 10px;
+  }
+}
+
+@media (max-width: 359px) {
+  .tab {
+    font-stretch: 100%;
+  }
 }
