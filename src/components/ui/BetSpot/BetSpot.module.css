@@ -14,8 +14,10 @@
   text-align: center;
 }
 
-.spot:hover {
-  background: rgba(245, 240, 228, .07);
+@media (hover: hover) {
+  .spot:hover {
+    background: rgba(245, 240, 228, .07);
+  }
 }
 
 .closed {

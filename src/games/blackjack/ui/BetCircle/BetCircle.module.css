@@ -13,8 +13,10 @@
   color: var(--ivory);
 }
 
-.betspot:hover {
-  background: rgba(245, 240, 228, .07);
+@media (hover: hover) {
+  .betspot:hover {
+    background: rgba(245, 240, 228, .07);
+  }
 }
 
 .name {

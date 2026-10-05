@@ -8,8 +8,10 @@
   white-space: nowrap;
 }
 
-.btn:hover {
-  background: rgba(245, 240, 228, .08);
+@media (hover: hover) {
+  .btn:hover {
+    background: rgba(245, 240, 228, .08);
+  }
 }
 
 .primary {
@@ -19,8 +21,10 @@
   font-weight: 700;
 }
 
-.primary:hover {
-  background: #E2C47E;
+@media (hover: hover) {
+  .primary:hover {
+    background: #E2C47E;
+  }
 }
 
 .btn[aria-disabled="true"] {
@@ -28,18 +32,22 @@
   cursor: not-allowed;
 }
 
-.btn[aria-disabled="true"]:hover {
-  background: transparent;
-}
+@media (hover: hover) {
+  .btn[aria-disabled="true"]:hover {
+    background: transparent;
+  }
 
-.primary[aria-disabled="true"]:hover {
-  background: var(--brass);
+  .primary[aria-disabled="true"]:hover {
+    background: var(--brass);
+  }
 }
 
 :global(dialog) .btn {
   border-color: #CBBFA9;
 }
 
-:global(dialog) .btn:hover {
-  background: #F0E9DA;
+@media (hover: hover) {
+  :global(dialog) .btn:hover {
+    background: #F0E9DA;
+  }
 }

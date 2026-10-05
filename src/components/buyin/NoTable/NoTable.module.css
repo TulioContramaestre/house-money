@@ -14,6 +14,8 @@
   text-decoration: none;
 }
 
-.link:hover {
-  background: #E2C47E;
+@media (hover: hover) {
+  .link:hover {
+    background: #E2C47E;
+  }
 }

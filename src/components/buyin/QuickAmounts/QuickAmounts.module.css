@@ -13,6 +13,8 @@
   font-size: 14px;
 }
 
-.amount:hover {
-  background: rgba(245, 240, 228, .08);
+@media (hover: hover) {
+  .amount:hover {
+    background: rgba(245, 240, 228, .08);
+  }
 }

@@ -1,5 +1,6 @@
 .wrap {
   min-height: 100vh;
+  min-height: 100svh;
   padding: 40px 16px 64px;
   display: flex;
   flex-direction: column;

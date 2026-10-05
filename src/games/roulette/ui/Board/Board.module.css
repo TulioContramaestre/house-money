@@ -22,8 +22,10 @@
   place-items: center;
 }
 
-.cell:hover {
-  background: rgba(245, 240, 228, .1);
+@media (hover: hover) {
+  .cell:hover {
+    background: rgba(245, 240, 228, .1);
+  }
 }
 
 .num.red {
@@ -38,12 +40,14 @@
   background: var(--zero);
 }
 
-.num.red:hover {
-  background: #C63A33;
-}
+@media (hover: hover) {
+  .num.red:hover {
+    background: #C63A33;
+  }
 
-.num.black:hover {
-  background: #2B2B2B;
+  .num.black:hover {
+    background: #2B2B2B;
+  }
 }
 
 .out {
