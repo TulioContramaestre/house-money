@@ -11,8 +11,8 @@ const clock: ReceiptClock = {
   time: (ms) => `t+${(ms - 1_700_000_000_000) / 60_000}m`,
 };
 
-/** The reference's buildReceipt text code, copied as written, as an independent oracle. */
-function referenceText(list: readonly LedgerEntry[], buyIn: number, final: number, checkText: string): string {
+/** The original app's receipt-text code, copied as written, as an independent oracle. */
+function originalText(list: readonly LedgerEntry[], buyIn: number, final: number, checkText: string): string {
   const bets = list.filter((e) => e.type === "bet");
   const net = final - buyIn;
   const won = bets.filter((e) => e.net > 0).length, lost = bets.filter((e) => e.net < 0).length, pushed = bets.length - won - lost;
@@ -52,8 +52,8 @@ const receipt = buildReceipt({
 });
 const text = receiptPlainText(receipt, clock);
 
-test("matches the reference format line for line", () => {
-  expect(text).toBe(referenceText(SAMPLE_SESSION, SAMPLE_BUY_IN, SAMPLE_FINAL, receipt.checkText));
+test("matches the original format line for line", () => {
+  expect(text).toBe(originalText(SAMPLE_SESSION, SAMPLE_BUY_IN, SAMPLE_FINAL, receipt.checkText));
 });
 
 test("spot-check of the layout", () => {

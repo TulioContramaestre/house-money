@@ -4,7 +4,7 @@ import { isRouletteBetKey, restIndex, spinTargetIndex } from "./rules";
 
 const cell = (key: string) => BOARD.find((c) => c.key === key);
 
-test("has 49 cells in the reference's DOM order", () => {
+test("has 49 cells in board order: numbers, columns, dozens, then even-money bets", () => {
   expect(BOARD).toHaveLength(49);
   expect(BOARD.map((c) => c.key).slice(0, 3)).toEqual(["n0", "n1", "n2"]);
   expect(BOARD.map((c) => c.key).slice(37)).toEqual(["c1", "c2", "c3", "d1", "d2", "d3", "low", "even", "red", "black", "odd", "high"]);

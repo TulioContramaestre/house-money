@@ -117,7 +117,7 @@ describe("SessionStats", () => {
 });
 
 describe("SessionLog", () => {
-  test("lists entries newest first with the reference layout", async () => {
+  test("lists entries newest first with game, bet, net, detail and balance", async () => {
     await open();
     render(<CasinoShell>{null}</CasinoShell>);
     const log = screen.getByRole("complementary", { name: "Session log" });

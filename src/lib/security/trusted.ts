@@ -1,5 +1,5 @@
-// Built-ins captured at module load, before later scripts can swap them. Unlike the reference we
-// don't freeze global prototypes: React and Next patch built-ins at runtime and freezing breaks them.
+// Built-ins captured at module load, before later scripts can swap them. Global prototypes aren't
+// frozen, because React and Next patch built-ins at runtime and freezing breaks them.
 const subtle: SubtleCrypto | undefined = globalThis.crypto.subtle;
 
 export const getRandomValues = globalThis.crypto.getRandomValues.bind(globalThis.crypto);

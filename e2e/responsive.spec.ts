@@ -72,7 +72,7 @@ test("taps don't zoom and leave no hover tint", async ({ page }, testInfo) => {
   }
 });
 
-test("the layout follows the reference breakpoints", async ({ page }, testInfo) => {
+test("the layout switches at the 900px and 620px breakpoints", async ({ page }, testInfo) => {
   const phone = testInfo.project.name === "phone";
   await buyIn(page);
 
