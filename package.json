@@ -9,8 +9,7 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
-    "test:e2e": "playwright test --grep-invert @visual",
-    "test:visual": "playwright test --grep @visual"
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "next": "16.3.8",

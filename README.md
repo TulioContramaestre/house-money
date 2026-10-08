@@ -4,7 +4,7 @@ A practice casino with play money: blackjack, baccarat, roulette and craps.
 
 You buy in with a bankroll in whole thousands, play any of the four tables with chips from 1K to 1M, and cash out to a receipt. The receipt has your net result, a per-game breakdown, the full session log and an integrity check of the ledger. Nothing is stored anywhere. Refreshing or closing the page ends the session, and the page warns you before that happens.
 
-It's a statically exported Next.js app (App Router, React 19, TypeScript, CSS Modules), with no server and no runtime dependencies beyond Next and React. `reference/index.html` is the original single-file version and serves as the behaviour spec. The rebuild matches it except for the [intentional differences](#differences-from-the-reference) listed below.
+It's a statically exported Next.js app (App Router, React 19, TypeScript, CSS Modules), with no server and no runtime dependencies beyond Next and React. It began as a single-file app, and this rebuild plays the same except for the [intentional differences](#differences-from-the-original) listed below.
 
 ## Getting started
 
@@ -32,9 +32,6 @@ npx playwright install chromium
 | `npm run typecheck` | `next typegen`, then `tsc --noEmit`. |
 | `npm test` | Unit and component tests (Vitest). |
 | `npm run test:e2e` | Builds, serves `out/`, then runs the Playwright suite at desktop (1360×860) and phone (390×844) sizes. |
-| `npm run test:visual` | Plays the same scripted session in `reference/index.html` and in the app, with the same random seed and a frozen clock. It writes matching screenshots to `test-results/visual/<desktop\|phone>/` for side-by-side review. It needs internet access, because the reference loads its fonts from Google. |
-
-Playwright clears `test-results/` at the start of every run, so run `test:visual` last if you want to keep its screenshots.
 
 ## Deploying to Cloudflare Pages
 
@@ -71,17 +68,17 @@ Everything runs in the browser, so the protections make cheating hard but can't 
 **What it can't stop:**
 - Someone pausing the code in the debugger and changing values.
 - Someone serving themselves a modified copy of the JavaScript.
-- A script or extension that runs before the app and replaces built-ins first. Unlike the reference, the app doesn't freeze global prototypes, because that breaks the React and Next.js runtime.
+- A script or extension that runs before the app and replaces built-ins first. Unlike the original, the app doesn't freeze global prototypes, because that breaks the React and Next.js runtime.
 - The seal shows the log wasn't edited after it was written in this page. It can't prove anything to anyone else, because the key never leaves the page and disappears with it.
 
 **The upgrade path** is a server-side dealer and ledger. For example, a Cloudflare Worker (with a Durable Object per session) would shuffle, deal, validate every action, keep the ledger, and sign the receipt with a key the browser never sees. The browser would then only display what the server decides.
 
-## Differences from the reference
+## Differences from the original
 
 These differences are intentional:
 
 - **Separate URLs.** Each screen has its own URL: `/`, `/play/<game>` and `/receipt`. Back and forward move between games, but they can't leave a game that's locked mid-round; you stay put and see the lock message. Unknown URLs show a short "There's no table here." page.
-- **No sideways scroll on phones.** The reference scrolls sideways in several places on phones:
+- **No sideways scroll on phones.** The original scrolled sideways in several places on phones:
   - At 390px the buy-in card was wider than the screen.
   - The game tabs ran off the edge, cutting off Craps.
   - Ten-digit balances widened the header.
@@ -92,7 +89,7 @@ These differences are intentional:
 - **Leaving a game.** When unplayed chips go back to cash, the game's message goes back to its opening prompt. In craps, while a point is on, it says "No bets down." instead.
 - **Buy-in double submit.** Submitting the buy-in a second time while the session is opening does nothing.
 - **Reduced motion.** The setting is read live, so changing it mid-session takes effect on the next deal, spin or roll.
-- **Fonts.** They're self-hosted with `next/font`. Courier Prime renders with very slightly different anti-aliasing from the copy the reference loads from Google Fonts. The layout is identical.
+- **Fonts.** They're self-hosted with `next/font`. Courier Prime renders with very slightly different anti-aliasing from the copy the original loaded from Google Fonts. The layout is identical.
 - **Prototypes.** Global prototypes aren't frozen (see [Limits](#limits)).
 
 ## Project layout
@@ -106,8 +103,6 @@ src/
   lib/          pure TypeScript: ledger, money, cards, random, receipt, timing, security
   hooks/        generic React hooks (DOM guard, deal-animation watermark)
 e2e/            Playwright specs
-reference/      the original single-file app (behaviour spec; never imported)
-docs/           the build brief
 ```
 
 `CLAUDE.md` has the architecture rules, how to add a game, and the code conventions.

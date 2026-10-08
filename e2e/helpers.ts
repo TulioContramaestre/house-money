@@ -47,11 +47,6 @@ export async function openGame(page: Page, name: "Blackjack" | "Baccarat" | "Rou
 
 export const chip = (page: Page, value: string) => page.getByRole("button", { name: `${value} chip`, exact: true });
 
-export async function selectChip(page: Page, value: string): Promise<void> {
-  await chip(page, value).click();
-  await expect(chip(page, value)).toHaveAttribute("aria-pressed", "true");
-}
-
 export const stat = (page: Page, name: string) =>
   topBar(page).locator("dt", { hasText: new RegExp(`^${name}$`) }).locator("xpath=following-sibling::dd[1]");
 
