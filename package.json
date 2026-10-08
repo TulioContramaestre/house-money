@@ -6,6 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "preview": "serve out",
+    "preview:worker": "wrangler dev",
+    "deploy": "npm run build && wrangler deploy",
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
@@ -27,6 +29,11 @@
     "jsdom": "^29.1.1",
     "serve": "^14.2.6",
     "typescript": "^5",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.11",
+    "wrangler": "^4.148.0"
+  },
+  "overrides": {
+    "serve": { "compression": "1.8.2" },
+    "sharp": "0.35.5"
   }
 }
