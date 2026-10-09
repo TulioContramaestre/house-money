@@ -102,6 +102,7 @@ These differences are intentional:
 - **Reduced motion.** The setting is read live, so changing it mid-session takes effect on the next deal, spin or roll.
 - **Fonts.** They're self-hosted with `next/font`. Courier Prime renders with very slightly different anti-aliasing from the copy the original loaded from Google Fonts. The layout is identical.
 - **Prototypes.** Global prototypes aren't frozen (see [Limits](#limits)).
+- **Rules dialog.** Each table has a ? button at the right end of its message line. It opens that game's rules and payouts in a dialog, and you can read them at any time, even mid-hand. The dialog closes with Got it, the ×, Escape or a tap outside it.
 
 ## Project layout
 

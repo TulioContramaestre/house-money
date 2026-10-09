@@ -56,11 +56,11 @@ Global prototypes are deliberately not frozen, because freezing them breaks Reac
    - The constructor calls `super(deps.ledger, "<opening message>")`.
    - Implement `dispatch` (an exhaustive `switch` ending in `exhaustive(action)`, ignoring actions while busy), `isBusy`, `canLeave`, `lockMessage`, `leave` (release unplayed chips, then `say()` so the view republishes) and `buildView` (which must include `message`, `busy` and `canLeave`).
    - Add `engine.test.ts` using `engineHarness` with `scriptedRng` or `stackedShoe` from `src/test/`.
-4. **Create `ui/` with a `Table` and an `Actions` component.** Both take `GameUiProps<View, Action>` (`{ view, dispatch }`). Build them from `components/ui`, `components/table`, `components/cards` and `components/dice`. Add a `ui/ui.test.tsx` using `renderLive` from `src/test/liveGame.tsx`.
+4. **Create `ui/` with a `Table`, an `Actions` and a `Rules` component.** `Table` and `Actions` take `GameUiProps<View, Action>` (`{ view, dispatch }`). Build them from `components/ui`, `components/table`, `components/cards` and `components/dice`. `Rules` takes no props and returns the rules copy as `<h3>` sections with `<ul>` lists; `GameStage` shows it in the rules dialog. Add a `ui/ui.test.tsx` using `renderLive` from `src/test/liveGame.tsx`, and pin the rules copy there.
 5. **Register it in two places:**
    - an entry `{ id, name, createEngine }` in `GAMES` in `src/games/registry.ts`;
-   - a line `<id>: connect("<id>", <Name>Table, <Name>Actions)` in `src/games/registry.ui.tsx` (the `satisfies Record<GameId, GameUi>` check fails until you do).
-6. **That's all the wiring.** The tab, the `/play/<id>` static route, chip handling, the log, the receipt's by-game lines and cash-out all follow from the registry.
+   - a line `<id>: connect("<id>", <Name>Table, <Name>Actions, <Name>Rules)` in `src/games/registry.ui.tsx` (the `satisfies Record<GameId, GameUi>` check fails until you do).
+6. **That's all the wiring.** The tab, the `/play/<id>` static route, the rules button, chip handling, the log, the receipt's by-game lines and cash-out all follow from the registry.
 7. **Add `e2e/<id>.spec.ts`:** at least 10 rounds, calling `expectLedgerAddsUp` after each. Add the tab name to `openGame` in `e2e/helpers.ts`.
 
 ## Conventions
