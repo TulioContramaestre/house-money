@@ -43,7 +43,13 @@ async function open(amount = 100_000) {
 const message = () => document.querySelector("[aria-live]")?.textContent;
 const button = (name: string) => screen.getByRole("button", { name });
 
-beforeEach(() => mocks.router.replace.mockClear());
+const showModal = vi.fn();
+
+beforeEach(() => {
+  mocks.router.replace.mockClear();
+  showModal.mockClear();
+  Object.defineProperty(HTMLElement.prototype, "showModal", { value: showModal, configurable: true });
+});
 afterEach(cleanup);
 
 test("shows the active game's message, table, chips and actions", async () => {
@@ -97,4 +103,19 @@ test("the broke banner sits on the felt", async () => {
   await settle(() => fireEvent.click(button("Spin")));
   const banner = screen.getByText("You're out of chips. Cash out to see how the session went.");
   expect(banner.closest(".table")).toBeTruthy();
+});
+
+test("the rules button opens the active game's rules", async () => {
+  await open();
+  const { rerender } = render(<GameStage requestedId="blackjack" />);
+  const dialog = () => document.querySelector("dialog")?.textContent;
+  fireEvent.click(button("How to play Blackjack"));
+  expect(showModal).toHaveBeenCalledTimes(1);
+  expect(dialog()).toContain("pays 3 to 2");
+  rerender(<GameStage requestedId="craps" />);
+  expect(screen.queryByRole("button", { name: "How to play Blackjack" })).toBeNull();
+  fireEvent.click(button("How to play Craps"));
+  expect(showModal).toHaveBeenCalledTimes(2);
+  expect(dialog()).toContain("Pass wins on 7 or 11");
+  expect(dialog()).not.toContain("pays 3 to 2");
 });

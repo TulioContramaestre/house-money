@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, screen } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
 import { engineHarness } from "@/test/engineHarness";
 import { renderLive, settle } from "@/test/liveGame";
 import { stackedShoe } from "@/test/stackedShoe";
 import { BlackjackEngine } from "../engine";
 import { BlackjackActions } from "./BlackjackActions";
+import { BlackjackRules } from "./BlackjackRules";
 import { BlackjackTable } from "./BlackjackTable";
 
 async function table(cards: string) {
@@ -88,4 +89,18 @@ describe("BlackjackTable", () => {
     expect(cardNames()).toHaveLength(4);
     expect(document.querySelectorAll(".fresh")).toHaveLength(0);
   });
+});
+
+test("the rules list each section and the house payouts", () => {
+  render(<BlackjackRules />);
+  expect(screen.getAllByRole("heading", { level: 3 }).map((h) => h.textContent)).toEqual(["Goal", "Your turn", "Dealer", "Payouts"]);
+  const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+  expect(items).toEqual(
+    expect.arrayContaining([
+      "Draws to 16 and stands on all 17s, soft 17 included.",
+      "Blackjack, an ace and a ten-value card as your first two cards, pays 3 to 2.",
+      "Split aces get one card each and can't be split again or doubled.",
+      "No insurance or surrender. Six decks, reshuffled when the shoe runs low.",
+    ]),
+  );
 });

@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, expect, test } from "vitest";
 import type { Rng } from "@/lib/random/rng";
 import { engineHarness } from "@/test/engineHarness";
 import { renderLive, settle } from "@/test/liveGame";
 import { CrapsEngine } from "../engine";
 import { CrapsActions } from "./CrapsActions";
+import { CrapsRules } from "./CrapsRules";
 import { CrapsTable } from "./CrapsTable";
 
 async function table() {
@@ -73,4 +74,18 @@ test("a seven out shows the loss and marks the seven in the history", async () =
     ["5", ""],
   ]);
   expect(off().classList.contains("away")).toBe(false);
+});
+
+test("the rules list each section and the house payouts", () => {
+  render(<CrapsRules />);
+  expect(screen.getAllByRole("heading", { level: 3 }).map((h) => h.textContent)).toEqual(["Come-out roll", "The point", "Odds", "One-roll bets"]);
+  const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+  expect(items).toEqual(
+    expect.arrayContaining([
+      "Don't pass wins on 2 or 3, pushes on 12 and loses on 7 or 11.",
+      "Odds pay true odds: 2 to 1 on 4 or 10, 3 to 2 on 5 or 9 and 6 to 5 on 6 or 8.",
+      "Field wins on 2, 3, 4, 9, 10, 11 or 12 and pays 1 to 1, with 2 paying double and 12 triple.",
+      "Any craps (2, 3 or 12) pays 7 to 1.",
+    ]),
+  );
 });

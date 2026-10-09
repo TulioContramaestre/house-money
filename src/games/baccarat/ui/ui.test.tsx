@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, expect, test } from "vitest";
 import { engineHarness } from "@/test/engineHarness";
 import { renderLive, settle } from "@/test/liveGame";
 import { stackedShoe } from "@/test/stackedShoe";
 import { BaccaratEngine } from "../engine";
 import { BaccaratActions } from "./BaccaratActions";
+import { BaccaratRules } from "./BaccaratRules";
 import { BaccaratTable } from "./BaccaratTable";
 
 async function table(cards: string) {
@@ -64,4 +65,18 @@ test("a tie lights both sides and pushes", async () => {
   expect([...t.container.querySelectorAll(".side")].map((side) => side.classList.contains("won"))).toEqual([true, true]);
   expect(within(spot("Banker")).getByText("Push")).toBeTruthy();
   expect(screen.getByTitle("Tie").textContent).toBe("T");
+});
+
+test("the rules list each section and the house payouts", () => {
+  render(<BaccaratRules />);
+  expect(screen.getAllByRole("heading", { level: 3 }).map((h) => h.textContent)).toEqual(["Betting", "Counting", "Drawing", "Payouts"]);
+  const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+  expect(items).toEqual(
+    expect.arrayContaining([
+      "Player draws on 0 to 5 and stands on 6 or 7.",
+      "If Player drew, Banker draws on 0 to 2; on 3 unless Player's third card is worth 8; on 4 if it's worth 2 to 7; on 5 if it's worth 4 to 7; on 6 if it's worth 6 or 7. Banker stands on 7.",
+      "Banker pays 0.95 to 1, a 5% commission.",
+      "Tie pays 8 to 1, and a tie pushes Player and Banker bets.",
+    ]),
+  );
 });

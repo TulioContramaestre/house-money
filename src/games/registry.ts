@@ -25,6 +25,10 @@ export type EngineSet = { readonly [K in GameId]: EngineOf<K> };
 export const GAME_IDS: readonly GameId[] = GAMES.map((game) => game.id);
 export const DEFAULT_GAME: GameId = "blackjack";
 
+export function gameName(id: GameId): string {
+  return GAMES.find((game) => game.id === id)?.name ?? id;
+}
+
 export function isGameId(value: string): value is GameId {
   return GAMES.some((game) => game.id === value);
 }

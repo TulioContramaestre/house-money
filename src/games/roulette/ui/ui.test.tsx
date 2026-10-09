@@ -1,11 +1,12 @@
 // @vitest-environment jsdom
-import { cleanup, fireEvent, screen, within } from "@testing-library/react";
+import { cleanup, fireEvent, render, screen, within } from "@testing-library/react";
 import { afterEach, describe, expect, test } from "vitest";
 import { engineHarness, type HarnessOptions } from "@/test/engineHarness";
 import { renderLive, settle } from "@/test/liveGame";
 import { scriptedRng } from "@/test/scriptedRng";
 import { RouletteEngine } from "../engine";
 import { RouletteActions } from "./RouletteActions";
+import { RouletteRules } from "./RouletteRules";
 import { RouletteTable } from "./RouletteTable";
 
 const never = () => new Promise<void>(() => {});
@@ -88,4 +89,18 @@ describe("WheelStrip", () => {
     expect(position(t.container)).toBe("37");
     expect(screen.getByLabelText("Last result 0").className).toBe("ball green");
   });
+});
+
+test("the rules list each section and the house payouts", () => {
+  render(<RouletteRules />);
+  expect(screen.getAllByRole("heading", { level: 3 }).map((h) => h.textContent)).toEqual(["The wheel", "Payouts"]);
+  const items = screen.getAllByRole("listitem").map((li) => li.textContent);
+  expect(items).toEqual(
+    expect.arrayContaining([
+      "Single zero, numbers 0 to 36.",
+      "A straight-up bet on any single number, 0 included, pays 35 to 1.",
+      "Dozens and columns pay 2 to 1.",
+      "When 0 comes up, every outside bet loses.",
+    ]),
+  );
 });

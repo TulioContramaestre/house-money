@@ -5,19 +5,26 @@ import { BrokeBanner } from "@/components/casino/BrokeBanner";
 import { ChipRack } from "@/components/casino/ChipRack";
 import { FeltTable } from "@/components/table/FeltTable";
 import { MessageLine } from "@/components/table/MessageLine";
+import { RulesButton } from "@/components/table/RulesButton";
 import { useActivateGame } from "@/session/guards";
 import { useActiveGame, useActiveView } from "@/session/hooks";
-import type { GameId } from "../registry";
+import { gameName, type GameId } from "../registry";
 import { GAME_UI } from "../registry.ui";
 import styles from "./GameStage.module.css";
 
 export function GameStage({ requestedId }: { readonly requestedId: GameId }) {
   useActivateGame(requestedId);
-  const { Table, Actions } = GAME_UI[useActiveGame()];
+  const game = useActiveGame();
+  const { Table, Actions, Rules } = GAME_UI[game];
   const { message } = useActiveView();
   return (
     <>
-      <MessageLine message={message} />
+      <div className={styles.head}>
+        <MessageLine message={message} />
+        <RulesButton game={gameName(game)}>
+          <Rules />
+        </RulesButton>
+      </div>
       <FeltTable>
         <BrokeBanner />
         <Table />

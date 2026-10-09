@@ -25,6 +25,11 @@ async function everyScreenFits(page: Page): Promise<void> {
     await openGame(page, game);
     expect(await fitsWidth(page)).toBe(true);
   }
+  await button(page, "How to play Blackjack").click();
+  await expect(page.getByRole("dialog")).toBeVisible();
+  expect(await fitsWidth(page)).toBe(true);
+  await button(page.getByRole("dialog"), "Got it").click();
+  await expect(page.getByRole("dialog")).toBeHidden();
   await button(topBar(page), "Cash out").click();
   await expect(page.getByRole("dialog")).toBeVisible();
   expect(await fitsWidth(page)).toBe(true);
