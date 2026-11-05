@@ -2,7 +2,7 @@
 
 # House Money
 
-A statically exported practice casino, rebuilt from an earlier single-file app. The tests are now the behaviour spec: the unit tests pin down rules, payouts, copy and timings, and the Playwright suite pins down flows and layout. Change copy or behaviour only on purpose, and update the tests and the README's differences list with it.
+A statically exported practice casino. The tests are the behaviour spec: the unit tests pin down rules, payouts, copy and timings, and the Playwright suite pins down flows and layout. Change copy or behaviour only on purpose, and update the tests and the README with it.
 
 ## Architecture
 
