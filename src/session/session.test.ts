@@ -89,6 +89,27 @@ describe("chips", () => {
     s.selectChip(1000);
     expect(s.getChipState().selected).toBe(1000);
   });
+
+  test("is broke once cash can't cover the smallest chip and nothing is on the table", async () => {
+    for (let seed = 1; seed < 200; seed++) {
+      const s = await opened(2000, { rng: seededRng(seed) });
+      s.requestSwitch("baccarat");
+      s.selectChip(1000);
+      while (s.getLedgerSnapshot().cash >= 1000) {
+        s.dispatch("baccarat", { type: "bet", spot: "banker" });
+        expect(s.getLedgerSnapshot().broke).toBe(false);
+        s.dispatch("baccarat", { type: "deal" });
+        await flush();
+      }
+      const { cash, onTable, broke } = s.getLedgerSnapshot();
+      if (cash === 0) continue;
+      expect(cash).toBeLessThan(1000);
+      expect(onTable).toBe(0);
+      expect(broke).toBe(true);
+      return;
+    }
+    throw new Error("Never landed on a balance below the smallest chip");
+  });
 });
 
 describe("dispatch", () => {

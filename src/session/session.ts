@@ -131,7 +131,7 @@ export function createSession(options: SessionOptions = {}) {
       balance: ledger.balance,
       buyIn: ledger.buyIn,
       net: ledger.balance - ledger.buyIn,
-      broke: ledger.isOpen && ledger.available === 0 && ledger.reserved === 0,
+      broke: ledger.isOpen && ledger.reserved === 0 && largestAffordableChip(ledger.available) === null,
       entries: Object.freeze(ledger.entries()),
     });
     return ledgerSnapshot;
